@@ -1,5 +1,5 @@
 {
-  "name": "@ffmpeg/core",
+  "name": "@jeffreyca/ffmpeg.wasm-core",
   "version": "0.11.0",
   "description": "ffmpeg.wasm core",
   "main": "dist/ffmpeg-core.js",
@@ -10,7 +10,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ffmpegwasm/FFmpeg.git"
+    "url": "git+https://github.com/JeffreyCA/ffmpeg.wasm-core.git"
   },
   "keywords": [
     "ffmpeg",
@@ -19,10 +19,10 @@
     "audio",
     "transcode"
   ],
-  "author": "jeromewus@gmail.com",
+  "author": "JeffreyCA <jeffreyca16@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ffmpegwasm/FFmpeg/issues"
+    "url": "https://github.com/JeffreyCA/ffmpeg.wasm-core/issues"
   },
-  "homepage": "https://github.com/ffmpegwasm/FFmpeg#readme"
+  "homepage": "https://github.com/JeffreyCA/ffmpeg.wasm-core"
 }

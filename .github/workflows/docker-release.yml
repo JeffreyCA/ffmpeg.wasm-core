@@ -1,6 +1,10 @@
-name: Build and Release
-
-on: workflow_dispatch
+name: Build, release, and publish
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag'
+        required: true
 
 jobs:
   build:
@@ -18,7 +22,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: wasm-core-dist
-          path: wasm/packages/core/dist/**
+          path: wasm/packages/core/**
 
   release:
     needs: build
@@ -28,9 +32,30 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: wasm-core-dist
-          path: dist
+          path: core
 
       - name: GH Release
         uses: softprops/action-gh-release@v2.0.6
         with:
-          files: dist/**
+          files: core/dist/**
+          tag_name: ${{ inputs.tag }}
+
+  publish:
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: wasm-core-dist
+          path: core
+
+      - run: npm publish --provenance --access public
+        working-directory: ./core
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
